@@ -1,0 +1,43 @@
+---
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+spec:
+  service_type: nodeport
+  nodeport_port: 30080
+
+  # Custom image from Docker Hub
+  image: ziadsaleemi/awx
+  image_version: "25.0.0"
+  image_pull_policy: Always
+
+  # Secrets
+  admin_password_secret: custom-admin-password
+  secret_key_secret: custom-secret-key
+
+  # Resource limits suited for local development
+  web_resource_requirements:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+  task_resource_requirements:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+  postgres_resource_requirements:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+  postgres_storage_requirements:
+    requests:
+      storage: 5Gi
