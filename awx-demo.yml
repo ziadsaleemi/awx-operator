@@ -3,5 +3,9 @@ apiVersion: awx.ansible.com/v1beta1
 kind: AWX
 metadata:
   name: awx-demo
+  namespace: awx
 spec:
   service_type: nodeport
+  nodeport_port: 30080
+  image: ziadsaleemi/awx
+  image_version: "25.0.0"
